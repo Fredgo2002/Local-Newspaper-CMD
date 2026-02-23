@@ -17,6 +17,70 @@
                 <span class="custom-text">ADD ARTICLE</span>
             </button>
         </div>
+        <div class="articles-container">
+            <table mat-table [dataSource]="articles">
+                <ng-container matColumnDef="headline">
+                    <th mat-header-cell *matHeaderCellDef> Article Headline </th>
+                    <td mat-cell *matCellDef="let article"> {{article.headline}} </td>
+                </ng-container>
+                <ng-container matColumnDef="author">
+                    <th mat-header-cell *matHeaderCellDef> Author </th>
+                    <td mat-cell *matCellDef="let article"> {{article.author}} </td>
+                </ng-container>
+                <ng-container matColumnDef="publication_date">
+                    <th mat-header-cell *matHeaderCellDef> Publish Date </th>
+                    <td mat-cell *matCellDef="let article"> {{article.publication_date}} </td>
+                </ng-container>
+                <ng-container matColumnDef="published">
+                    <th mat-header-cell *matHeaderCellDef> Published </th>
+                    <td mat-cell *matCellDef="let article">
+                        <mat-slide-toggle class="custom-slide-toggle" [checked]="article.published"></mat-slide-toggle>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let article">
+                        <button mat-icon-button cdkOverlayOrigin #trigger="cdkOverlayOrigin" (click)="isOpen = !isOpen">
+                            <mat-icon>more_horiz</mat-icon>
+                        </button>
+                        <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
+                            [cdkConnectedOverlayOpen]="isOpen">
+                            <div class="overlay-panel">
+                                <ul class="options-list">
+                                    <li>
+                                        <button>
+                                            <mat-icon>edit</mat-icon>
+                                            <span>Edit</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <mat-icon>visibility</mat-icon>
+                                            <span>View</span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button>
+                                            <mat-icon>delete</mat-icon>
+                                            <span>Delete</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ng-template>
+                    </td>
+                </ng-container>
+                <tr mat-header-row
+                    *matHeaderRowDef="['headline', 'author', 'publication_date', 'published', 'actions']"></tr>
+                <tr mat-row
+                    *matRowDef="let row; columns: ['headline', 'author', 'publication_date', 'published', 'actions'];">
+                </tr>
+            </table>
+            <mat-paginator [length]="articles.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"
+                aria-label="Select page">
+            </mat-paginator>
+
+        </div>
 
     </div>
 </div>

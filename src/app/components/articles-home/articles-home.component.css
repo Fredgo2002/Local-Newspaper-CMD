@@ -37,3 +37,88 @@ mat-form-field {
 .custom-button mat-icon {
     color: #ffffff;
 }
+
+.articles-container {
+    margin-top: 1rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: 500;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid #e0e0e0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #000000DE;
+}
+
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #000000DE;
+}
+
+tr:hover td {
+    background-color: #F5F6FD80;
+}
+
+tr:last-child td {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.custom-slide-toggle {
+    --mdc-switch-selected-track-color: #98facf;
+    --mdc-switch-selected-hover-track-color: #98facf;
+    --mdc-switch-selected-focus-track-color: #98facf;
+    --mdc-switch-selected-pressed-track-color: #98facf;
+
+    --mdc-switch-selected-handle-color: #00d1a1;
+    --mdc-switch-selected-hover-handle-color: #00d1a1;
+    --mdc-switch-selected-focus-handle-color: #00d1a1;
+    --mdc-switch-selected-pressed-handle-color: #00d1a1;
+}
+
+.overlay-panel {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+}
+
+.options-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.options-list li {
+    margin-bottom: 8px;
+}
+
+.options-list li button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border: none;
+    background-color: transparent;
+    color: #000000DE;
+    cursor: pointer;
+    width: 100%
+}
+
+.options-list li button:hover {
+    background-color: #F5F6FD80;
+}
