@@ -1,16 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { ARTICLES, Article } from 'src/app/constants/articles.constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticlesService {
-
-  constructor(
-    private http: HttpClient
-  ) { }
+  private articles: Article[] = [...ARTICLES]
 
   getArticles() {
-    return this.http.get<any[]>('assets/data/articles.json');
+    return this.articles;
+  }
+
+  addArticle(article: Article) {
+    this.articles.push(article);
+  }
+
+  updateArticle(article: Article) {
+    const index = this.articles.findIndex((a) => a.headline === article.headline);
+    if (index !== -1) {
+      this.articles[index] = article;
+    }
+  }
+
+  deleteArticle(article: Article) {
+    this.articles = this.articles.filter((a) => a.headline !== article.headline);
   }
 }

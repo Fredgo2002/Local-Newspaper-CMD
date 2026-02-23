@@ -1,10 +1,15 @@
 <div class="sidebar">
-    <div class="logo p-3">
-        <img class="m-auto d-block my-3" src="assets/logo/senirop_logo.png" alt="Logo">
+    <div class="sidebar-logo">
+        <img src="assets/logo/senirop_logo.png" alt="Logo">
     </div>
-    <ul class="m-auto d-block">
-        <li class="p-3 ms-5 my-4" *ngFor="let item of menuItems">
+    <ul>
+        <li *ngFor="let item of menuItems">
             <a [routerLink]="item.url">{{ item.label }}</a>
         </li>
     </ul>
+    <div class="logout-section">
+        <button class="logout-button">
+            <span>Logout</span>
+        </button>
+    </div>
 </div>
