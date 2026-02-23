@@ -21,12 +21,14 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SidePaneComponent } from './layout/side-pane/side-pane.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticlesHomeComponent,
-    SidebarComponent
+    SidebarComponent,
+    SidePaneComponent
   ],
   imports: [
     BrowserModule,
