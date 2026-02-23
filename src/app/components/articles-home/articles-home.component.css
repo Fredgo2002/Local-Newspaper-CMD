@@ -17,7 +17,7 @@
     color: #333333;
 }
 
-mat-form-field {
+.white-bg-form-field {
     width: 250px;
 }
 
@@ -95,6 +95,7 @@ tr:last-child td {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 12px;
+    width: 138px;
 }
 
 .options-list {
@@ -114,6 +115,8 @@ tr:last-child td {
     padding: 8px;
     border: none;
     background-color: transparent;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
     color: #000000DE;
     cursor: pointer;
     width: 100%
@@ -121,4 +124,71 @@ tr:last-child td {
 
 .options-list li button:hover {
     background-color: #F5F6FD80;
+}
+
+.side-pane {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 600px;
+    height: 100vh;
+    background: white;
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.2);
+    padding: 24px;
+}
+
+.viewHeadline {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    font-style: bold;
+    color: #000000DE;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.article-action {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #000000DE;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.save-button {
+    background-color: #98B6FA;
+    color: #ffffff;
+    width: 150px;
+}
+
+.save-button:disabled {
+    background-color: #C9C9C9;
+    width: 150px;
+    opacity: 0.5;
+}
+
+.save-button span {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.save-button:disabled span {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #070008;
+}
+
+.form-label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.6);
+    padding-bottom: 0.5rem;
+    padding-right: 2rem;
 }

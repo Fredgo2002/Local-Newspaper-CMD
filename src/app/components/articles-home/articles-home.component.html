@@ -5,14 +5,13 @@
         <span class="subtitle mb-4">Articles</span>
         <div class="d-flex justify-content-between">
             <mat-form-field class="white-bg-form-field" appearance="outline">
-                <mat-label class="custom-text">All</mat-label>
-                <mat-select>
-                    <mat-option value="1" class="custom-text">Option 1</mat-option>
-                    <mat-option value="2" class="custom-text">Option 2</mat-option>
-                    <mat-option value="3" class="custom-text">Option 3</mat-option>
+                <mat-select [(value)]="articlesCategories.all">
+                    <mat-option value="published" class="custom-text">Published</mat-option>
+                    <mat-option value="unpublished" class="custom-text">Unpublished</mat-option>
+                    <mat-option value="all" class="custom-text">All</mat-option>
                 </mat-select>
             </mat-form-field>
-            <button mat-button class="custom-button">
+            <button mat-button class="custom-button" (click)="openSidePaneAdd()">
                 <mat-icon>add</mat-icon>
                 <span class="custom-text">ADD ARTICLE</span>
             </button>
@@ -39,22 +38,23 @@
                 </ng-container>
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let article">
-                        <button mat-icon-button cdkOverlayOrigin #trigger="cdkOverlayOrigin" (click)="isOpen = !isOpen">
+                    <td mat-cell *matCellDef="let article; let i = index">
+                        <button mat-icon-button cdkOverlayOrigin #trigger="cdkOverlayOrigin" (click)="toggleMenu(i)">
                             <mat-icon>more_horiz</mat-icon>
                         </button>
                         <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
-                            [cdkConnectedOverlayOpen]="isOpen">
+                            [cdkConnectedOverlayOpen]="openMenuIndex === i" [cdkConnectedOverlayHasBackdrop]="true"
+                            (backdropClick)="openMenuIndex = null">
                             <div class="overlay-panel">
                                 <ul class="options-list">
                                     <li>
-                                        <button>
+                                        <button (click)="openSidePaneEdit(article)">
                                             <mat-icon>edit</mat-icon>
                                             <span>Edit</span>
                                         </button>
                                     </li>
                                     <li>
-                                        <button>
+                                        <button (click)="openSidePaneView(article)">
                                             <mat-icon>visibility</mat-icon>
                                             <span>View</span>
                                         </button>
@@ -79,8 +79,88 @@
             <mat-paginator [length]="articles.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 15]"
                 aria-label="Select page">
             </mat-paginator>
-
+            <div cdkOverlayOrigin #sidePaneOrigin="cdkOverlayOrigin"></div>
         </div>
 
     </div>
+    <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="sidePaneOrigin"
+        [cdkConnectedOverlayOpen]="isOpenSidePane" [cdkConnectedOverlayHasBackdrop]="true"
+        (backdropClick)="closeSidePane()">
+
+        <div class="side-pane">
+            <div class="d-flex justify-content-end">
+                <button mat-button (click)="closeSidePane()">
+                    <mat-icon style="color: #90CAF9;">close</mat-icon>
+                    <span style="color: #90CAF9;">CLOSE</span>
+                </button>
+            </div>
+            <div *ngIf="mode==='view'" class="m-0 p-0">
+                <div class="viewHeadline " *ngIf="selectedArticle">
+                    <span>{{selectedArticle.headline}}</span>
+                </div>
+                <div>
+                    <span>Author</span>
+                    <span>{{selectedArticle.author}}</span>
+                </div>
+                <div>
+                    <span>Body</span>
+                    <p>{{selectedArticle.body}}</p>
+                </div>
+                <div>
+                    <span>Publish Date</span>
+                    <span>{{selectedArticle.publication_date}}</span>
+                </div>
+            </div>
+            <div *ngIf="mode==='edit' || mode==='add'" class="m-0 p-0">
+                <div class="article-action mb-3" *ngIf="mode==='edit'">
+                    <span>Edit Article</span>
+                </div>
+                <div class="article-action mb-3" *ngIf="mode==='add'">
+                    <span>New Article</span>
+                </div>
+                <form [formGroup]="articleForm">
+                    <div class="d-flex flex-column mb-3">
+                        <span class="form-label">Headline*</span>
+                        <mat-form-field class="w-100">
+                            <input matInput formControlName="headline">
+                        </mat-form-field>
+                    </div>
+                    <div class="d-flex flex-column mb-3">
+                        <span class="form-label">Author*</span>
+                        <mat-form-field class="w-100">
+                            <input matInput formControlName="author">
+                        </mat-form-field>
+                    </div>
+                    <div class="d-flex flex-column mb-3">
+                        <span class="form-label">Body*</span>
+                        <mat-form-field class="w-100">
+                            <textarea matInput formControlName="body" style="height: 200px;"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="d-flex flex-column mb-3">
+                        <span class="form-label">Publish Date*</span>
+                        <mat-form-field class="w-100">
+                            <input matInput formControlName="publication_date">
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+            <div class="mb-5">
+                <span class="form-label">Publish*</span>
+                <mat-slide-toggle *ngIf="mode==='edit' || mode==='view'" class="custom-slide-toggle"
+                    [checked]="selectedArticle.published"></mat-slide-toggle>
+                <mat-slide-toggle *ngIf="mode==='add'" class="custom-slide-toggle" [checked]="true"></mat-slide-toggle>
+            </div>
+            <div *ngIf="mode==='add'" class="d-flex justify-content-end">
+                <button mat-button (click)="saveArticle()" class="save-button" [disabled]="articleForm.invalid">
+                    <span>SAVE</span>
+                </button>
+            </div>
+            <div *ngIf="mode==='edit'" class="d-flex justify-content-end">
+                <button mat-button (click)="saveArticle()" class="save-button" [disabled]="articleForm.invalid">
+                    <span>UPDATE</span>
+                </button>
+            </div>
+        </div>
+    </ng-template>
 </div>

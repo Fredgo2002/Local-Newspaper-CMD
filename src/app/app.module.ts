@@ -18,6 +18,9 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatButtonToggleModule,
     MatSlideToggleModule,
     MatPaginatorModule,
-    OverlayModule
+    OverlayModule,
+    MatSidenavModule,
+    CommonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
