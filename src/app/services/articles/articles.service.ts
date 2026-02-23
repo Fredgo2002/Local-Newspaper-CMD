@@ -16,13 +16,13 @@ export class ArticlesService {
   }
 
   updateArticle(article: Article) {
-    const index = this.articles.findIndex((a) => a.headline === article.headline);
+    const index = this.articles.findIndex((a) => a.id === article.id);
     if (index !== -1) {
       this.articles[index] = article;
     }
   }
 
   deleteArticle(article: Article) {
-    this.articles = this.articles.filter((a) => a.headline !== article.headline);
+    this.articles = this.articles.filter((a) => a.id !== article.id);
   }
 }

@@ -79,6 +79,7 @@ export class ArticlesHomeComponent implements OnInit {
   saveArticle() {
     if (this.mode === 'edit') {
       const article: Article = {
+        id: this.selectedArticle.id,
         headline: this.articleForm.value.headline,
         body: this.articleForm.value.body,
         author: this.articleForm.value.author,
@@ -91,6 +92,7 @@ export class ArticlesHomeComponent implements OnInit {
       this.articles = [...this.articlesService.getArticles()];
     } else if (this.mode === 'add') {
       const article: Article = {
+        id: this.articles.length + 1,
         headline: this.articleForm.value.headline,
         body: this.articleForm.value.body,
         author: this.articleForm.value.author,
