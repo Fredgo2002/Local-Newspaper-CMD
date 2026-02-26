@@ -22,13 +22,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SidePaneComponent } from './layout/side-pane/side-pane.component';
+import { ErrorComponent } from './dialog/error/error.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticlesHomeComponent,
     SidebarComponent,
-    SidePaneComponent
+    SidePaneComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ import { SidePaneComponent } from './layout/side-pane/side-pane.component';
     OverlayModule,
     MatSidenavModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

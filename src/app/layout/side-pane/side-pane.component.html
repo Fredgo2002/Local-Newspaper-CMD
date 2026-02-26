@@ -21,6 +21,17 @@
                     <span class="label">Body</span>
                     <p class="view-text py-2">{{selectedArticle.body}}</p>
                 </div>
+                <div>
+                    <div *ngIf="selectedArticle.images.length > 0">
+                        <h4>Selected Files:</h4>
+                        <!-- <ul>
+                            <li *ngFor="let img of selectedArticle.images; let i = index">
+                                <img src="img.src" alt="">
+                                <span> {{img.name}}</span>
+                            </li>
+                        </ul> -->
+                    </div>
+                </div>
                 <div class="data-container" style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
                     <span class="label">Publish Date</span>
                     <span class="view-text py-2">{{selectedArticle.publication_date}}</span>
@@ -55,8 +66,27 @@
                 <div class="d-flex flex-column mb-3">
                     <span class="form-label">Body*</span>
                     <mat-form-field appearance="outline" class="w-100">
-                        <textarea matInput formControlName="body" style="height: 200px;"></textarea>
+                        <textarea matInput formControlName="body" style="height: 50px;"></textarea>
                     </mat-form-field>
+                </div>
+                <div class="d-flex flex-column mb-3">
+                    <span class="form-label">Upload Images</span>
+                    <div class="d-flex flex-box m-0 p-0">
+                        <input formControlName="images" #fileInput type="file" multiple class="file-upload"
+                            (change)="uploadImage($event)">
+                        <span> Drop files here to upload </span>
+                    </div>
+                    <div>
+                        <div *ngIf="selectedFiles.length > 0">
+                            <h4>Selected Files:</h4>
+                            <ul>
+                                <li *ngFor="let file of selectedFiles; let i = index">
+                                    {{ file.name }}
+                                    <button (click)="removeFile(i)">Remove</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="d-flex flex-column mb-3">
                     <span class="form-label">Publish Date*</span>

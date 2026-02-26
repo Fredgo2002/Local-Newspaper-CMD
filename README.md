@@ -35,3 +35,5 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+## Image Displaying
+No image is tecnically saved, it is just referenced from a local folder. For uploading images to an article, they must be from /assets/images.

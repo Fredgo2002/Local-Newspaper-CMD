@@ -31,6 +31,7 @@ export class ArticlesHomeComponent implements OnInit {
       headline: ['', Validators.required],
       body: ['', Validators.required],
       author: ['', Validators.required],
+      images: [[{ name: String, src: String }]],
       publication_date: ['', Validators.required],
       published: [false, Validators.required]
     });
@@ -83,6 +84,7 @@ export class ArticlesHomeComponent implements OnInit {
         headline: this.articleForm.value.headline,
         body: this.articleForm.value.body,
         author: this.articleForm.value.author,
+        images: this.articleForm.value.images,
         publication_date: this.articleForm.value.publication_date,
         published: this.articleForm.value.published
       }
@@ -91,14 +93,17 @@ export class ArticlesHomeComponent implements OnInit {
       this.articleForm.reset();
       this.articles = [...this.articlesService.getArticles()];
     } else if (this.mode === 'add') {
+
       const article: Article = {
         id: this.articles.length + 1,
         headline: this.articleForm.value.headline,
         body: this.articleForm.value.body,
         author: this.articleForm.value.author,
+        images: this.articleForm.value.images,
         publication_date: this.articleForm.value.publication_date,
         published: this.articleForm.value.published
       }
+      console.log(article)
       this.articlesService.addArticle(article);
       this.closeSidePane();
       this.articleForm.reset();
